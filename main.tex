@@ -1,12 +1,7 @@
 \documentclass[11pt]{article}
 \input{preamble}
-\usepackage{hyperref,xcolor}
-\usepackage{comment}
-\usepackage[square,numbers]{natbib}
-\bibliographystyle{abbrvnat}
-\usepackage{parskip}
+\usepackage[numbers]{natbib}
 
-\newcommand{\algrule}[1][.2pt]{\par\vskip.5\baselineskip\hrule height #1\par\vskip.5\baselineskip}
 \author{Kent Gauen}
 \title{Draft}
 
@@ -25,11 +20,11 @@ We would like to answer the following questions:
 
 
 \begin{itemize}
-\item How can contrastive learning be used to disentangle simple information, e.g. noise, from an image? Can we test the disentangle encoder?
+\item How can contrastive learning be used to disentangle simple information, e.g. noise, from an image? Can we test the disentangle encoder to generate specified noise?
 \item Similar to related work~\cite{xiao2020should}, can we use disentangled representations to capture dynamic lighting?
 \item How can we apply contrastive learning to decouple static and dynamic image features?
-\item With our trained $\tt{enc}_{CL}(x) = \tt{enc}_{\text{static}}(x)$ and $\tt{enc}_{DI}(x) = \tt{enc}_{\text{dynamic}}(x)$ , can we use generate new dynamic features on the static scene?
-\item With our trained $\tt{enc}_{CL}(x) = \tt{enc}_{\text{static}}(x)$ and $\tt{enc}_{DI}(x) = \tt{enc}_{\text{dynamic}}(x)$ , can we use generate the next frame in the sequence?
+%\item With our trained $\tt{enc}_{CL}(x) = \tt{enc}_{\text{static}}(x)$ and $\tt{enc}_{DI}(x) = \tt{enc}_{\text{dynamic}}(x)$ , can we use generate new dynamic features on the static scene?
+%\item With our trained $\tt{enc}_{CL}(x) = \tt{enc}_{\text{static}}(x)$ and $\tt{enc}_{DI}(x) = \tt{enc}_{\text{dynamic}}(x)$ , can we use generate the next frame in the sequence?
 \end{itemize}
 
 
@@ -47,7 +42,7 @@ Complete
 In progress
 
 \begin{itemize}
-\item Image Reconstruction: train on cifar-10  (10 of 1000+ epochs)
+\item Image Reconstruction: train on cifar-10  (10 of +1000 epochs)
 \end{itemize}
 
 
@@ -70,8 +65,8 @@ To do
 
 
 \newpage
-\section*{References}
 
+\bibliographystyle{abbrvnat}
 \bibliography{ref}
 
 
