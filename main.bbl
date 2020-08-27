@@ -1,0 +1,25 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Chen et~al.(2020)Chen, Kornblith, Norouzi, and Hinton]{chen2020simple}
+T.~Chen, S.~Kornblith, M.~Norouzi, and G.~Hinton.
+\newblock A simple framework for contrastive learning of visual
+  representations.
+\newblock \emph{arXiv preprint arXiv:2002.05709}, 2020.
+
+\bibitem[Liu et~al.(2020)Liu, Ginosar, Zhou, Efros, and
+  Snavely]{liu2020learning}
+A.~Liu, S.~Ginosar, T.~Zhou, A.~A. Efros, and N.~Snavely.
+\newblock Learning to factorize and relight a city.
+\newblock \emph{arXiv preprint arXiv:2008.02796}, 2020.
+
+\bibitem[Xiao et~al.(2020)Xiao, Wang, Efros, and Darrell]{xiao2020should}
+T.~Xiao, X.~Wang, A.~A. Efros, and T.~Darrell.
+\newblock What should not be contrastive in contrastive learning.
+\newblock \emph{arXiv preprint arXiv:2008.05659}, 2020.
+
+\end{thebibliography}
