@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\input{preamble}
+\usepackage{hyperref,xcolor}
+\usepackage{comment}
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{abbrvnat}
+\usepackage{parskip}
+
+\newcommand{\algrule}[1][.2pt]{\par\vskip.5\baselineskip\hrule height #1\par\vskip.5\baselineskip}
+\author{Kent Gauen}
+\title{Draft}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Overview}
+
+The purpose of this project is to disentangle static and dynamic features of an image.
+Recent works have show the ability to decouple features and transformations among scenes~\cite{liu2020learning}. Contrastive learning~\cite{chen2020simple,xiao2020should} is a scheme to learn an encoder invariant to a set of user-defined transformations. Further work has demonstrated by modifying the transformation class, the user is able to modify the invariant class of transformations~\cite{xiao2020should}. Based on these ideas, we propose the following project:
+
+Contrastive learning gives us an encoding of the input image $x$, $\tt{enc}_{CL}(x)$. We would like to maintain complete information of the original image, while still providing the encoded representation of the image. In other words, we want to take the original image $x$ and apply a representation function $\tt{repr}(x) = \tt{enc}_{CL}(x) \cup \tt{enc}_{DI}(x)$ where the information contained in encodings are disjoint. Note $\tt{enc}_{DI}(x)$ is the \emph{disentangled information} of image $x$. 
+
+We would like to answer the following questions:
+
+
+\begin{itemize}
+\item How can contrastive learning be used to disentangle simple information, e.g. noise, from an image? Can we test the disentangle encoder?
+\item Similar to related work~\cite{xiao2020should}, can we use disentangled representations to capture dynamic lighting?
+\item How can we apply contrastive learning to decouple static and dynamic image features?
+\item With our trained $\tt{enc}_{CL}(x) = \tt{enc}_{\text{static}}(x)$ and $\tt{enc}_{DI}(x) = \tt{enc}_{\text{dynamic}}(x)$ , can we use generate new dynamic features on the static scene?
+\item With our trained $\tt{enc}_{CL}(x) = \tt{enc}_{\text{static}}(x)$ and $\tt{enc}_{DI}(x) = \tt{enc}_{\text{dynamic}}(x)$ , can we use generate the next frame in the sequence?
+\end{itemize}
+
+
+\section{Progress Overview}
+
+Complete
+
+\begin{itemize}
+\item Contrastive learning: code
+\item Contrastive learning: train on cifar-10
+\item Contrastive learning: test on cifar-10
+\item Image Reconstruction: code
+\end{itemize}
+
+In progress
+
+\begin{itemize}
+\item Image Reconstruction: train on cifar-10  (10 of 1000+ epochs)
+\end{itemize}
+
+
+To do
+
+\begin{itemize}
+\item Image Reconstruction: test on cifar-10
+\item Image Reconstruction: train on face dataset
+\item Image Reconstruction: test on face dataset
+\item Write down the decoupling mechanism for noisy images
+\item Disentanglement Network: code
+\item Disentanglement Network: train on cifar-10
+\item Disentanglement Network: test on cifar-10
+\item Identify more related work
+\end{itemize}
+
+
+\newpage
+\section*{Related Work}
+
+
+\newpage
+\section*{References}
+
+\bibliography{ref}
+
+
+\end{document}
+
+
+% auto generate a title
+% \AtBeginDocument{\maketitle}
