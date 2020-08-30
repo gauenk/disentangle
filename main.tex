@@ -59,6 +59,45 @@ To do
 \item Identify more related work
 \end{itemize}
 
+\section{Disentangling Model Overview}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.65\linewidth]{figs/disent_model}
+  \caption{This figure shows the logic of the disentanglement model.}
+\end{figure}
+
+\begin{align}
+  L_{simCLR} = \sum_{i \neq j} \rho(z_i,z_j)
+\end{align}
+
+\begin{align}
+  L_{disent} = \sum_{i \neq j} \rho(g_i,\hat{g}_{i,j})
+\end{align}
+
+
+\newpage
+\section{Related Model Overview}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.65\linewidth]{figs/imgrec_model}
+  \caption{This figure shows the logic of the image reconstruction model outlined in~\cite{xia2019training}}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.65\linewidth]{figs/simclr_model}
+  \caption{This figure shows the logic of the simple contrastive learning model outlined in~\cite{chen2020simple}}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.75\linewidth]{figs/imgrec_simclr_model}
+  \caption{({\tt{new!}}) This figure shows the logic of the combination of simple contrastive learning model and image reconstruction models. This framework removes the need to the training data to provide enough transformation diversity, provided we are able to generate the transformations on our own data set.}
+\end{figure}
+
 
 \newpage
 \section*{Related Work}
