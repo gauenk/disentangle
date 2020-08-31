@@ -83,7 +83,7 @@ Recent research on learning invariant representations in deep learning networks 
 We validate our method on image reconstruction tasks and observed state-of-the-art performance compared to previous methods.
 
 
-Recent work on disentangling static and dynamic images has shown several results. Recently~\cite{liu2020learning} proposed a method to decompose the time-varying illumination and static scene components. While our method also utilizes swapping with encoders and decoders, this paper uses the contrastive learning loss function compared to the $L_1$ loss function. We experimentally demonstrate the significance of the contrastive learning loss function in Section~\ref{subsec:disent_mnist_illumination}.
+Recent work on disentangling static and dynamic images has shown several results. Recently~\cite{liu2020learning} proposed a method to decompose the time-varying illumination and static scene components. While our method also utilizes swapping with encoders and decoders, this paper uses the contrastive learning loss function compared to the $L_1$ loss function. We experimentally demonstrate the significance of the contrastive learning loss function in Section~\ref{subsec:gnt_xent_illumination}
 
 
 \section{Disentangling Model Overview}
@@ -162,11 +162,11 @@ This section runs experiments demonstrating how generalizing the NT-Xent loss ch
 
 
 
-\subsection{Image Denoising}\label{subsec:disent_mnist_denoising}
+\subsection{Image Denoising}\label{subsec:gnt_xent_denoising}
 
 We run image denoising experiments by adding random Gaussian noise to a ``clean'' images $N$ times. We compare the results of image denoising compared with~\cite{xia2019training,metzler2016denoising,li2013efficient}. We do 
 
-\subsection{Dynamic Illumination}\label{subsec:disent_mnist_illumination}
+\subsection{Dynamic Illumination}\label{subsec:gnt_xent_illumination}
 
 \section{Disentangling Gaussian Noise, Random Noise Blocks, and Motion with MNIST Data}\label{sec:disent_mnist}
 
