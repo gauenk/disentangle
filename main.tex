@@ -86,9 +86,9 @@ We validate our method on image reconstruction tasks and observed state-of-the-a
 Recent work on disentangling static and dynamic images has shown several results. Recently~\cite{liu2020learning} proposed a method to decompose the time-varying illumination and static scene components. While our method also utilizes swapping with encoders and decoders, this paper uses the contrastive learning loss function compared to the $L_1$ loss function. We experimentally demonstrate the significance of the contrastive learning loss function in Section~\ref{subsec:gnt_xent_illumination}
 
 
-\section{Disentangling Model Overview}
+\section{Disentangling Model for Semantically Invariant Transformations}
 
-This method utilizes encoders, a decoder, and swapping to disentangle static and dynamic scene components from a collection of input images. The relationships between the encoders, decoder, and swapping is shown in Figure~\ref{fig:disent_losses}(a) and equation~\ref{eq:repr}. The input is assumed to be a transformed image $t_i(\vx)$. This transformed image is the input to both the static encoder ${\tt enc_{c}}$ or the dynamic encoder ${\tt enc_{d}}$. The representations of the dynamic encoder is decoded with each static representation and then decoded once more. This ``swapping-propogation'' allows us to use the contrastive learning loss function along the final decoded representations. The static components utilize information from both the first and second steps of decoding. In Section~\ref{sec:gen_nt_xent}, we explore the impact of the second decoding step on the learned model and static representations. This method trains the static encoder to be invariant to non-semantic changes of the image, and trains the dynamic encoder to be invariant to the static image semantics. Thus the information the encoders capture is disjoint. To ensure the representations are complete, we also include an image construction loss. This image reconstruction loss forces the embeddings to retain semanic information of the image.
+This method utilizes encoders, a decoder, and swapping to disentangle static and dynamic scene components from a collection of input images. The relationships between the encoders, decoder, and swapping is shown in Figure~\ref{fig:disent_losses_invariant}(a) and equation~\ref{eq:repr}. The input is assumed to be a transformed image $t_i(\vx)$. This transformed image is the input to both the static encoder ${\tt enc_{c}}$ or the dynamic encoder ${\tt enc_{d}}$. The representations of the dynamic encoder is decoded with each static representation and then decoded once more. This ``swapping-propogation'' allows us to use the contrastive learning loss function along the final decoded representations. The static components utilize information from both the first and second steps of decoding. In Section~\ref{sec:gen_nt_xent}, we explore the impact of the second decoding step on the learned model and static representations. This method trains the static encoder to be invariant to non-semantic changes of the image, and trains the dynamic encoder to be invariant to the static image semantics. Thus the information the encoders capture is disjoint. To ensure the representations are complete, we also include an image construction loss. This image reconstruction loss forces the embeddings to retain semanic information of the image.
 
 \begin{figure*}[h]
   \begin{subfigure}[b]{0.195\textwidth}
@@ -108,18 +108,18 @@ This method utilizes encoders, a decoder, and swapping to disentangle static and
     \includegraphics[height=1.8in]{figs/imgrec_loss}
     \caption{}
   \end{subfigure}%
-  \caption{The diagram in figure (a) shows the disentanglement loss and figure (b) shows the image reconstruction loss. Both losses are achieved through encoding statics and dynamics, swapping embeddings, and decoding the swapped values.}
-  \label{fig:disent_losses}
+  \caption{This figure shows the structure of the disentanglement framework for semanically invariant transformations $t_i$. The diagram in figure (a) shows the disentanglement loss and figure (b) shows the image reconstruction loss. Both losses are achieved through encoding statics and dynamics, swapping embeddings, and decoding the swapped values.}
+  \label{fig:disent_losses_invariant}
 \end{figure*}
 
 When transformation $t_i$ applied is applied to the input image $\vx$, $t_i(\vx)$, the encoded static representation is $\vh_i \in \mathbb{R}^{n_{enc}} $ and encoded dynamic representation is $\vg_i \in \mathbb{R}^{n_{enc}}$. The decoder can accept any pair of encodings. When decoding using the static representation from transformation $t_i$ and dynamic representation from transformation $t_j$, the decoded vector is denoted $\vd_{i,j}$. The ability for the decoder to swap static and dynamic embeddings is the key of our proposed method. This allows us to propogate apply the transformations to the static representations through decoding, encoder the image dynamics, and apply the contrastive learning loss.
 
 
-We propose five different loss functions. The first loss the to learn dynamic scene encoding. This loss is shown in Figure~\ref{fig:disent_losses}(a). For each content embedding, we decode with a fixed dynamic embedding. Thus the resulting image's dynamics can be futhur encoded and should all be equal. We apply a generalized nt-xent (gNT-Xent) loss function to make all the representations agree. Similar to contrastive learning, the negative samples are the other images in the batch. The projection operation is applied to the encoded representations before the cosine similarity is computed.
+We propose five different loss functions. The first loss the to learn dynamic scene encoding. This loss is shown in Figure~\ref{fig:disent_losses_invariant}(a). For each content embedding, we decode with a fixed dynamic embedding. Thus the resulting image's dynamics can be futhur encoded and should all be equal. We apply a generalized nt-xent (gNT-Xent) loss function to make all the representations agree. Similar to contrastive learning, the negative samples are the other images in the batch. The projection operation is applied to the encoded representations before the cosine similarity is computed.
 
-The next two loss functions learn the static scene encoding. The first static scene loss is simply a simple generalization of the NT-Xent loss function~\cite{chen2020simple} and is depicted in Figure~\ref{fig:disent_losses}(b) on the left-hand side. This is the contrastive learning loss function applied to $N$ inputs rather than a pair of inputs. In Figure~\ref{fig:disent_losses}(b) on the right, we show the second staic scene loss applied after a step of decoding and encoding. The purpose of this loss is to influence the the gradient of the decoder. We conjecture this second static encoding loss will decrease training time by providing more information each update. Again, the projection operation is applied to the encoded representations before the cosine similarity is computed.
+The next two loss functions learn the static scene encoding. The first static scene loss is simply a simple generalization of the NT-Xent loss function~\cite{chen2020simple} and is depicted in Figure~\ref{fig:disent_losses_invariant}(b) on the left-hand side. This is the contrastive learning loss function applied to $N$ inputs rather than a pair of inputs. In Figure~\ref{fig:disent_losses_invariant}(b) on the right, we show the second staic scene loss applied after a step of decoding and encoding. The purpose of this loss is to influence the the gradient of the decoder. We conjecture this second static encoding loss will decrease training time by providing more information each update. Again, the projection operation is applied to the encoded representations before the cosine similarity is computed.
  
-The final two loss functions are for image reconstruction. In Figure~\ref{fig:disent_losses}(c), we set the zero vector to indicate the output image should contain only the semantic information. Thus all reconstructed images should contain only the original image, and we apply the contrastive learning loss in image space. We do not compare the reconstructed images to the original input image to simulate not having access to the groundtruth image. We demonstrate the impact of including a loss term comparing to the original image to the clean reconstructed images in Section~\ref{subsec:disent_mnist_denoising}. In Figure~\ref{fig:disent_losses}(c) on the right, we show the noisy image reconstruction loss. When the decoder uses the embeddings from the same transformation, the decoded image should be the same as the original image: $\vd_{i,i} \approx t_i(\vx)$. 
+The final two loss functions are for image reconstruction. In Figure~\ref{fig:disent_losses_invariant}(c), we set the zero vector to indicate the output image should contain only the semantic information. Thus all reconstructed images should contain only the original image, and we apply the contrastive learning loss in image space. We do not compare the reconstructed images to the original input image to simulate not having access to the groundtruth image. We demonstrate the impact of including a loss term comparing to the original image to the clean reconstructed images in Section~\ref{subsec:disent_mnist_denoising}. In Figure~\ref{fig:disent_losses_invariant}(c) on the right, we show the noisy image reconstruction loss. When the decoder uses the embeddings from the same transformation, the decoded image should be the same as the original image: $\vd_{i,i} \approx t_i(\vx)$. 
 
 
 \begin{align}\label{eq:repr}
@@ -167,6 +167,31 @@ The explicit formula for computing the contrastive learning loss is given as
 \]
 
 With the first dimension size $N+1$ being representation with the same encoding and the second dimension size $M$ being the batch size, supplying negative samples for the contrastive learning loss.
+
+\section{Disentangling Model for Semantically Varying Transformations}
+
+\begin{figure*}[h]
+  \begin{subfigure}[b]{0.33\textwidth}
+    \centering
+    \includegraphics[height=1.8in]{figs/disentangle_loss_dynamic_varying_ti}
+    \caption{}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.33\textwidth}
+    \centering
+    \includegraphics[height=1.8in]{figs/disentangle_loss_static_clean_varying_ti}
+    \caption{}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[b]{0.33\textwidth}
+    \centering
+    \includegraphics[height=1.8in]{figs/disentangle_loss_noisy_varying_ti}
+    \caption{}
+  \end{subfigure}%
+  \caption{This figure shows the structure of the disentanglement framework for semantically varying transformations $t_i$. This is an adjusted version of semanically invariant transformations to allow encoded representations for each transformed image $t_i(\vx)$ to vary with each transformation.}
+  \label{fig:disent_losses_varying}
+\end{figure*}
+
 
 \newpage
 
