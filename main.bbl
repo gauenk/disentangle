@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{6}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -11,11 +11,31 @@ T.~Chen, S.~Kornblith, M.~Norouzi, and G.~Hinton.
   representations.
 \newblock \emph{arXiv preprint arXiv:2002.05709}, 2020.
 
+\bibitem[Li et~al.(2013)Li, Yin, Jiang, and Zhang]{li2013efficient}
+C.~Li, W.~Yin, H.~Jiang, and Y.~Zhang.
+\newblock An efficient augmented lagrangian method with applications to total
+  variation minimization.
+\newblock \emph{Computational Optimization and Applications}, 56\penalty0
+  (3):\penalty0 507--530, 2013.
+
 \bibitem[Liu et~al.(2020)Liu, Ginosar, Zhou, Efros, and
   Snavely]{liu2020learning}
 A.~Liu, S.~Ginosar, T.~Zhou, A.~A. Efros, and N.~Snavely.
 \newblock Learning to factorize and relight a city.
 \newblock \emph{arXiv preprint arXiv:2008.02796}, 2020.
+
+\bibitem[Metzler et~al.(2016)Metzler, Maleki, and
+  Baraniuk]{metzler2016denoising}
+C.~A. Metzler, A.~Maleki, and R.~G. Baraniuk.
+\newblock From denoising to compressed sensing.
+\newblock \emph{IEEE Transactions on Information Theory}, 62\penalty0
+  (9):\penalty0 5117--5144, 2016.
+
+\bibitem[Xia and Chakrabarti(2019)]{xia2019training}
+Z.~Xia and A.~Chakrabarti.
+\newblock Training image estimators without image ground truth.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  2439--2449, 2019.
 
 \bibitem[Xiao et~al.(2020)Xiao, Wang, Efros, and Darrell]{xiao2020should}
 T.~Xiao, X.~Wang, A.~A. Efros, and T.~Darrell.
