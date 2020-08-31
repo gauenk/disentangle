@@ -59,6 +59,7 @@ To do
 \begin{itemize}
 \item Disentanglement Network: train on cifar-10
 \item Disentanglement Network: test on cifar-10
+\item explore taking an average of encoded representations to share information among encoded images. right now, each image only has the single, noisy view of the original image. if a block is covering the curl of a six, then maybe it looks like a five. How could anyone know what the correct image actually is? By sharing information among different static encodings, we allow the model to "know" what is happening. This might be related to the {\tt agg} step in graph convolution.... actually many of these terms seem related to it. maybe look at the isogcnn paper to explore the connection.
 \item Identify more related work
 \end{itemize}
 
