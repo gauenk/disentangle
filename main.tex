@@ -152,6 +152,22 @@ We let $\mathcal{D}_{(N,M)}$ be the index set for samples different from sample 
   \mD_{\text{clean}} &= (\vd_1,\ldots,\vd_N)
 \end{align}
 
+The explicit formula for computing the contrastive learning loss is given as
+
+\[
+  L_h = \gamma_h \sum_{i=1}^N {\tt gNtXent}(\vh_i,\vh_{i,1},\ldots,\vh_{i,N})
+\]
+
+\[
+  {\tt gNtXent}(\vh_i,\hat{\vh}_{i,1},\ldots,\hat{\vh}_{i,N})
+  =
+  {\tt gNtXent}(\vz_1,\vz_2,\ldots,\vz_{N+1})
+  =
+  \sum_{i=1}^{N+1} \sum_{j=1}^{N+1} \mathbbm{1}[(i,j) \in \mathcal{V}(N+1,M)] l_{i,j}
+\]
+
+With the first dimension size $N+1$ being representation with the same encoding and the second dimension size $M$ being the batch size, supplying negative samples for the contrastive learning loss.
+
 \newpage
 
 \section{Generalized NT-Xent Loss}\label{sec:gen_nt_xent}
