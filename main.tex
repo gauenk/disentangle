@@ -193,6 +193,34 @@ With the first dimension size $N+1$ being representation with the same encoding 
 \end{figure*}
 
 
+Figure~\ref{fig:disent_losses_varying}(c) including the $\vg_i$ term: We can think of $\vh = {\tt GCN}(\vh_1,\ldots,\vh_N)$ as scene, $\vh_k^G$ as the viewpoint $k$, $\vg_i$ as ``additional noise'', and $\vd_{i,1}$ as the decoded image with ``additional noise'' from $i$. The video $\vh$ pans across to create the view points but the camera picks up noise.
+
+Figure~\ref{fig:disent_losses_varying}(c) without the $\vg_i$ term: We can think of $\vh = {\tt GCN}(\vh_1,\ldots,\vh_N)$ as static component and $\vh_k^G$ as the dynamic component with $\vd_{i,1}$ as the decoded noisy image and $\vh$ as the decoded clean image. This also gives one decoder and one encoder.
+
+In Figure~\ref{fig:disent_losses_varying}, say we remove the second encoder. This is nice since we handle dynamics through the graphconv operations. But then the question is: how do we include a contrastive learning term for the dynamics of the image? In Figure~\ref{fig:disent_losses_varying}(a) shows how the second encoder gives us a ``plug-and-play'' ability. We might be able to resolve this problem by identifying a smart ``aggregate'' function. For example...
+
+GIN~\cite{wu2020comprehensive} identifies the following general functions used in graph convolution:
+
+\begin{align}
+  a_v^{(k)}
+  &=
+  {\tt AGGREGATE}^{(k)}
+  \left(\left\{
+  h_u^{(k-1)} : u \in \mathcal{N}(v)
+  \right\}\right),
+  &
+  h_v^{(k)}
+  &=
+  {\tt COMBINE}^{(k)}
+  \left(
+  h_v^{(k-1)},a_v
+  \right)
+\end{align}
+
+for $h_v^{(k)}$ is the feature vector of node $v$ at the $k$-th iteration/layer. 
+
+
+
 \newpage
 
 \section{Generalized NT-Xent Loss}\label{sec:gen_nt_xent}
